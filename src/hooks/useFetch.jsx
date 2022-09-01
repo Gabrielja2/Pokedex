@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-const URL = 'https://pokeapi.co/api/v2/pokemon?limit=1000&offset=0';
+const URL = 'https://pokeapi.co/api/v2/pokemon?limit=18&offset=0';
 
 // fetch API
 const useFetch = () => {

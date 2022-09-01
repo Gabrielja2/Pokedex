@@ -1,4 +1,10 @@
+import { useState } from "react";
+import { useEffect } from "react";
+
 const Header = () => {
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [data, setData] = useState([]);
 
   const types = [
     'normal',
@@ -10,7 +16,7 @@ const Header = () => {
   ];
 
   return (
-    <header>
+    <header style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
       <h1>Minha Pokédex</h1>
       <input placeholder="Digite um pokemon" type="text"></input>
       <div className="radios-filters">

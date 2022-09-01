@@ -5,12 +5,14 @@ const Section = () => {
   
   
   return (
-    <section>
+    <section style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'center'}}>
       {
         isLoading ? <p>Waiting is Loading...</p> : (
 
           data.map((poke, i) => (
-            <div key={i}>{poke.name}</div>
+            <div
+            style={{border: '1px black solid', width: '200px', height: '200px'}}
+            key={i}>{poke.name}</div>
           ))
 
         )
