@@ -1,12 +1,13 @@
 import Header from "../components/header";
-import Section from "../components/section";
+import PokemonList from "../components/pokemonList";
+
 
 const Pokedex = () => {
 
   return (
     <main>
       <Header />
-      <Section />
+      <PokemonList />
     </main>
   )
 }
