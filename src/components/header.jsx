@@ -1,31 +1,48 @@
-import { useState } from "react";
-import { useEffect } from "react";
+import { useContext, useEffect, useState } from 'react';
+import Context from '../context/context';
+import { fetchTypes } from '../services/fetch';
 
-const Header = () => {
 
-  const [isLoading, setIsLoading] = useState(false);
-  const [data, setData] = useState([]);
 
-  const types = [
-    'normal',
-    'poison',
-    'bug',
-    'fire',
-    'water',
-    'electric'
-  ];
+function Header() {
+  
+  const { filterName, setFilterName } = useContext(Context)
+  const [types, setTypesList] = useState([])
+
+  useEffect(() => {
+    const callFetchTypes = async () => {
+      const typesList = await fetchTypes();
+      const typesJson = await typesList.json();
+      const typesResults = typesJson.results;
+      const typesFiltered = typesResults.map(type => type.name);
+      setTypesList(typesFiltered);
+   
+    };
+    callFetchTypes();
+  }, []);
+  
+
 
   return (
-    <header style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
-      <h1>Minha Pokédex</h1>
-      <input placeholder="Digite um pokemon" type="text"></input>
-      <div className="radios-filters">
+    <header className="flex flex-col items-center">
+      <h1 className="text-5xl">Minha Pokédex</h1>
+      <input
+      className=" w-full max-w-xs border-2 border-cyan-500/95 my-2"
+      placeholder="Digite um pokemon"
+      type="text"
+      onChange={ ({target}) => setFilterName( target.value) }
+      value={ filterName }>
+      </input>
+      <div className="flex flex-wrap buttons-filters justify-center gap-4">
       {
         types.map((type, i) => (
-          <label key={i} htmlFor={`filter-${type}`}>
-            <input id={`filter-${type}`} type="radio" value={type} name="filters" />
-            {type}
-          </label>
+          
+            <button key={i} className="border-2 border-cyan-500/95 rounded-lg mx-1 w-20"
+            id={`filter-${type}`} type="button">
+              {type}
+            </button>
+           
+          
         ))
       }
       </div>      
